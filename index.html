@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe & PayPal Fee Calculator | Reverse Invoice Rate Tool</title>
+    <meta name="description" content="Calculate exact merchant fees for Stripe, PayPal, and Square. Features reverse calculation mode to know how much to invoice to receive your target amount.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .ad-placeholder {
+            background-color: #f3f4f6;
+            border: 1px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 py-4 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                💳 PayFeeCalc <span class="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2 py-0.5 rounded">2026 Free Tool</span>
+            </h1>
+            <span class="text-xs text-slate-500">100% Client-Side & Secure</span>
+        </div>
+    </header>
+
+    <!-- Top Ad Banner Placeholder -->
+    <div class="max-w-4xl mx-auto w-full px-4 mt-4">
+        <div class="ad-placeholder h-20 rounded-lg text-center">
+            [ Google AdSense Top Responsive Banner ]
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto w-full px-4 py-6 flex-grow">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Left 2 Cols: Calculator -->
+            <div class="md:col-span-2 space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    
+                    <!-- Mode Switcher -->
+                    <div class="flex rounded-lg bg-slate-100 p-1 mb-6">
+                        <button id="modeStandard" onclick="setMode('standard')" class="flex-1 py-2 text-sm font-medium rounded-md bg-white shadow-sm text-slate-900 transition">
+                            I'm Charging ($ Gross)
+                        </button>
+                        <button id="modeReverse" onclick="setMode('reverse')" class="flex-1 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-900 transition">
+                            I Want to Receive ($ Net)
+                        </button>
+                    </div>
+
+                    <!-- Input Controls -->
+                    <div class="space-y-4">
+                        <div>
+                            <label id="inputLabel" class="block text-sm font-medium text-slate-700 mb-1">Invoice / Transaction Amount ($)</label>
+                            <div class="relative rounded-md shadow-sm">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <span class="text-slate-400 font-bold">$</span>
+                                </div>
+                                <input type="number" id="amountInput" value="100" min="0" step="0.01" oninput="calculate()"
+                                    class="block w-full rounded-lg border-slate-300 pl-8 pr-12 py-3 text-xl font-bold border focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="0.00">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <span class="text-slate-400 text-sm">USD</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Options Row -->
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-500 mb-1">Transaction Region</label>
+                                <select id="regionSelect" onchange="calculate()" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-indigo-500">
+                                    <option value="us">United States (Domestic)</option>
+                                    <option value="intl">International (+1.5% Cross-Border)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-500 mb-1">Processor Rate Preset</label>
+                                <select id="processorPreset" onchange="applyPreset()" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-indigo-500">
+                                    <option value="stripe">Stripe Standard (2.9% + $0.30)</option>
+                                    <option value="paypal">PayPal Standard (3.49% + $0.49)</option>
+                                    <option value="custom">Custom Rate</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculation Results Card -->
+                    <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-3 gap-2 text-center bg-indigo-50/50 p-4 rounded-xl">
+                        <div>
+                            <div class="text-xs text-slate-500">Gross Charge</div>
+                            <div id="resGross" class="text-lg font-extrabold text-slate-900">$100.00</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500">Processing Fee</div>
+                            <div id="resFee" class="text-lg font-extrabold text-red-500">-$3.20</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-500">You Receive (Net)</div>
+                            <div id="resNet" class="text-lg font-extrabold text-emerald-600">$96.80</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Processor Comparison Table -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-sm font-bold text-slate-900 mb-4">Comparison Breakdown</h2>
+                    <table class="w-full text-left text-sm">
+                        <thead class="text-xs text-slate-400 uppercase border-b">
+                            <tr>
+                                <th class="pb-2">Processor</th>
+                                <th class="pb-2">Rate Applied</th>
+                                <th class="pb-2">Total Fee</th>
+                                <th class="pb-2 text-right">Net Payout</th>
+                            </tr>
+                        </thead>
+                        <tbody id="compTable" class="divide-y divide-slate-100">
+                            <!-- JS Inject -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- FAQ SEO Section -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-sm space-y-4">
+                    <h2 class="font-bold text-slate-900 text-base">Frequently Asked Questions</h2>
+                    <div>
+                        <h3 class="font-semibold text-slate-800">How does reverse fee calculation work?</h3>
+                        <p class="text-slate-600 text-xs mt-1">
+                            When invoicing clients, payment processors take a fee percentage from the total charge, not the net amount. To receive an exact amount (e.g. $100), you must use the formula: <code>Gross = (Target Net + Fixed Fee) / (1 - Percentage Rate)</code>.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-slate-800">Are Stripe and PayPal fees tax deductible?</h3>
+                        <p class="text-slate-600 text-xs mt-1">
+                            Yes, in most jurisdictions, merchant processing fees are considered ordinary business expenses and can be deducted during tax filing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Col: Sticky Sidebar Ad -->
+            <div class="space-y-6">
+                <div class="ad-placeholder h-96 rounded-2xl sticky top-4">
+                    [ Google AdSense Sidebar Rectangle Ad ]
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+        <p>© 2026 PayFeeCalc. Free utility tool for freelancers & merchants.</p>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        let currentMode = 'standard';
+        let customRate = 0.029;
+        let customFixed = 0.30;
+
+        function setMode(mode) {
+            currentMode = mode;
+            const btnStd = document.getElementById('modeStandard');
+            const btnRev = document.getElementById('modeReverse');
+            const lbl = document.getElementById('inputLabel');
+
+            if (mode === 'standard') {
+                btnStd.className = "flex-1 py-2 text-sm font-medium rounded-md bg-white shadow-sm text-slate-900 transition";
+                btnRev.className = "flex-1 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-900 transition";
+                lbl.innerText = "Invoice / Transaction Amount ($)";
+            } else {
+                btnRev.className = "flex-1 py-2 text-sm font-medium rounded-md bg-white shadow-sm text-slate-900 transition";
+                btnStd.className = "flex-1 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-900 transition";
+                lbl.innerText = "Target Net Amount You Want to Receive ($)";
+            }
+            calculate();
+        }
+
+        function applyPreset() {
+            const preset = document.getElementById('processorPreset').value;
+            if (preset === 'stripe') { customRate = 0.029; customFixed = 0.30; }
+            else if (preset === 'paypal') { customRate = 0.0349; customFixed = 0.49; }
+            calculate();
+        }
+
+        function calculate() {
+            const inputVal = parseFloat(document.getElementById('amountInput').value) || 0;
+            const region = document.getElementById('regionSelect').value;
+            const extraRate = (region === 'intl') ? 0.015 : 0;
+
+            // Current Primary Processor Calc
+            const rate = customRate + extraRate;
+            let gross = 0, fee = 0, net = 0;
+
+            if (currentMode === 'standard') {
+                gross = inputVal;
+                fee = (gross * rate) + customFixed;
+                net = gross - fee;
+            } else {
+                net = inputVal;
+                gross = (net + customFixed) / (1 - rate);
+                fee = gross - net;
+            }
+
+            document.getElementById('resGross').innerText = '$' + gross.toFixed(2);
+            document.getElementById('resFee').innerText = '-$' + fee.toFixed(2);
+            document.getElementById('resNet').innerText = '$' + net.toFixed(2);
+
+            updateComparisonTable(inputVal, region, currentMode);
+        }
+
+        function updateComparisonTable(val, region, mode) {
+            const extra = (region === 'intl') ? 0.015 : 0;
+            const processors = [
+                { name: 'Stripe', rate: 0.029 + extra, fixed: 0.30 },
+                { name: 'PayPal', rate: 0.0349 + extra, fixed: 0.49 },
+                { name: 'Square', rate: 0.026 + extra, fixed: 0.10 }
+            ];
+
+            const tbody = document.getElementById('compTable');
+            tbody.innerHTML = '';
+
+            processors.forEach(p => {
+                let g = 0, f = 0, n = 0;
+                if (mode === 'standard') {
+                    g = val;
+                    f = (g * p.rate) + p.fixed;
+                    n = g - f;
+                } else {
+                    n = val;
+                    g = (n + p.fixed) / (1 - p.rate);
+                    f = g - n;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = "py-2";
+                tr.innerHTML = `
+                    <td class="py-2.5 font-medium text-slate-800">${p.name}</td>
+                    <td class="py-2.5 text-xs text-slate-500">${(p.rate * 100).toFixed(2)}% + $${p.fixed.toFixed(2)}</td>
+                    <td class="py-2.5 text-red-500 font-semibold">-$${f.toFixed(2)}</td>
+                    <td class="py-2.5 text-right font-bold text-slate-900">$${n.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Init
+        calculate();
+    </script>
+</body>
+</html>
