@@ -3,13 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stripe & PayPal Fee Calculator | Reverse Invoice Rate Tool</title>
-    <meta name="description" content="Calculate exact merchant fees for Stripe, PayPal, and Square. Features reverse calculation mode to know how much to invoice to receive your target amount.">
+    
+    <!-- 1. TDK (Title, Description, Keywords) Optimization -->
+    <title>Stripe & PayPal Fee Calculator (2026) | Reverse Invoice Tool</title>
+    <meta name="description" content="Free online Stripe & PayPal fee calculator with Reverse Mode. Calculate exact merchant processing fees or know how much to invoice to get paid your exact net target.">
+    <meta name="keywords" content="stripe fee calculator, paypal fee calculator, reverse fee calculator, calculate merchant fees, how much to invoice">
+    <meta name="author" content="PayFeeCalc">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical Tag (Update with your domain after purchase) -->
+    <link rel="canonical" href="https://YOUR-DOMAIN.com/">
+
+    <!-- 2. Open Graph & Twitter Cards for Social/AI Indexing -->
+    <meta property="og:site_name" content="PayFeeCalc">
+    <meta property="og:title" content="Stripe & PayPal Fee Calculator (2026) | Reverse Invoice Tool">
+    <meta property="og:description" content="Calculate exact merchant fees or reverse-calculate invoice amounts to receive your exact net payout. 100% free & instant.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://YOUR-DOMAIN.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stripe & PayPal Fee Calculator (2026)">
+    <meta name="twitter:description" content="Free online Stripe & PayPal merchant fee and reverse invoice calculator.">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Analytics 4 Placeholder (Replace G-XXXXXXXXXX after setup) -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <!-- Google AdSense Placeholder (Uncomment & insert client ID after approval) -->
+    <!--
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    -->
+
+    <!-- 3. Schema.org JSON-LD (WebSite, WebApplication & FAQPage for SEO/GEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://YOUR-DOMAIN.com/#webapp",
+          "url": "https://YOUR-DOMAIN.com/",
+          "name": "PayFeeCalc - Merchant Fee & Reverse Calculator",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "All",
+          "browserRequirements": "Requires JavaScript",
+          "description": "Free web utility to calculate payment processing fees for Stripe, PayPal, Square and perform reverse fee invoicing calculations.",
+          "featureList": [
+            "Reverse Fee Invoicing Calculation",
+            "Stripe vs PayPal Fee Comparison",
+            "Cross-Border International Fee Adjustment",
+            "Instant Breakdown Copying"
+          ],
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://YOUR-DOMAIN.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How does reverse fee calculation work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "When invoicing clients, processors deduct fees from the total charged amount. To receive an exact net amount (e.g. $100), use the reverse fee formula: Gross = (Target Net + Fixed Fee) / (1 - Percentage Rate)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the standard Stripe fee in 2026?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Stripe's standard US domestic fee is 2.9% + $0.30 per successful card charge. International transactions incur an additional 1.5% cross-border fee."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the standard PayPal merchant fee in 2026?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "PayPal Checkout standard rate for US domestic commercial transactions is 3.49% + $0.49 per transaction."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are payment processing fees tax deductible?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, in most jurisdictions, merchant processing fees charged by Stripe, PayPal, or Square are considered ordinary business operating expenses and can be deducted during tax filing."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <style>
         .ad-placeholder {
-            background-color: #f3f4f6;
+            background-color: #f8fafc;
             border: 1px dashed #cbd5e1;
             display: flex;
             align-items: center;
@@ -25,16 +129,16 @@
     <header class="bg-white border-b border-slate-200 py-4 shadow-sm">
         <div class="max-w-4xl mx-auto px-4 flex justify-between items-center">
             <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-                💳 PayFeeCalc <span class="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2 py-0.5 rounded">2026 Free Tool</span>
+                💳 PayFeeCalc <span class="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2 py-0.5 rounded">2026 Tool</span>
             </h1>
-            <span class="text-xs text-slate-500">100% Client-Side & Secure</span>
+            <span class="text-xs text-slate-500 hidden sm:inline">100% Client-Side & Secure</span>
         </div>
     </header>
 
-    <!-- Top Ad Banner Placeholder -->
+    <!-- Top Responsive Ad Slot -->
     <div class="max-w-4xl mx-auto w-full px-4 mt-4">
         <div class="ad-placeholder h-20 rounded-lg text-center">
-            [ Google AdSense Top Responsive Banner ]
+            [ Google AdSense Header Banner Slot ]
         </div>
     </div>
 
@@ -42,9 +146,11 @@
     <main class="max-w-4xl mx-auto w-full px-4 py-6 flex-grow">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
-            <!-- Left 2 Cols: Calculator -->
+            <!-- Left 2 Cols: Interactive Tool & GEO Rich Content -->
             <div class="md:col-span-2 space-y-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                
+                <!-- Main Calculator Card -->
+                <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     
                     <!-- Mode Switcher -->
                     <div class="flex rounded-lg bg-slate-100 p-1 mb-6">
@@ -82,84 +188,142 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-500 mb-1">Processor Rate Preset</label>
+                                <label class="block text-xs font-medium text-slate-500 mb-1">Processor Preset</label>
                                 <select id="processorPreset" onchange="applyPreset()" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-indigo-500">
                                     <option value="stripe">Stripe Standard (2.9% + $0.30)</option>
                                     <option value="paypal">PayPal Standard (3.49% + $0.49)</option>
-                                    <option value="custom">Custom Rate</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
                     <!-- Calculation Results Card -->
-                    <div class="mt-6 pt-6 border-t border-slate-100 grid grid-cols-3 gap-2 text-center bg-indigo-50/50 p-4 rounded-xl">
-                        <div>
-                            <div class="text-xs text-slate-500">Gross Charge</div>
-                            <div id="resGross" class="text-lg font-extrabold text-slate-900">$100.00</div>
+                    <div class="mt-6 pt-6 border-t border-slate-100 bg-indigo-50/50 p-4 rounded-xl relative">
+                        <div class="grid grid-cols-3 gap-2 text-center">
+                            <div>
+                                <div class="text-xs text-slate-500">Gross Charge</div>
+                                <div id="resGross" class="text-lg font-extrabold text-slate-900">$100.00</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500">Fee Deduction</div>
+                                <div id="resFee" class="text-lg font-extrabold text-red-500">-$3.20</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-500">You Receive (Net)</div>
+                                <div id="resNet" class="text-lg font-extrabold text-emerald-600">$96.80</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="text-xs text-slate-500">Processing Fee</div>
-                            <div id="resFee" class="text-lg font-extrabold text-red-500">-$3.20</div>
-                        </div>
-                        <div>
-                            <div class="text-xs text-slate-500">You Receive (Net)</div>
-                            <div id="resNet" class="text-lg font-extrabold text-emerald-600">$96.80</div>
+                        
+                        <!-- Engagement Button -->
+                        <div class="mt-4 text-center">
+                            <button onclick="copyResult()" id="copyBtn" class="text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-1.5 px-4 rounded-full transition shadow-sm">
+                                📋 Copy Calculation Breakdown
+                            </button>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Processor Comparison Table -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                    <h2 class="text-sm font-bold text-slate-900 mb-4">Comparison Breakdown</h2>
-                    <table class="w-full text-left text-sm">
-                        <thead class="text-xs text-slate-400 uppercase border-b">
-                            <tr>
-                                <th class="pb-2">Processor</th>
-                                <th class="pb-2">Rate Applied</th>
-                                <th class="pb-2">Total Fee</th>
-                                <th class="pb-2 text-right">Net Payout</th>
-                            </tr>
-                        </thead>
-                        <tbody id="compTable" class="divide-y divide-slate-100">
-                            <!-- JS Inject -->
-                        </tbody>
-                    </table>
-                </div>
+                <!-- Comparison Breakdown Table -->
+                <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-sm font-bold text-slate-900 mb-4">Real-Time Processor Fee Comparison (2026)</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="text-xs text-slate-400 uppercase border-b">
+                                <tr>
+                                    <th class="pb-2">Processor</th>
+                                    <th class="pb-2">Applied Rate</th>
+                                    <th class="pb-2">Fee</th>
+                                    <th class="pb-2 text-right">Net Payout</th>
+                                </tr>
+                            </thead>
+                            <tbody id="compTable" class="divide-y divide-slate-100">
+                                <!-- JS Inject -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- GEO Optimized Section: Mathematical Formula & Explanation (Extracted by AI Engines) -->
+                <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+                    <h2 class="text-base font-bold text-slate-900">How to Calculate Reverse Invoice Fees?</h2>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        When invoicing a client as a freelancer or merchant, payment processing fees are deducted from the <strong>Gross Amount</strong> charged. If you ask for $100 without accounting for fees, Stripe or PayPal will deduct their percentage, leaving you with less than your target payout.
+                    </p>
+                    <div class="bg-slate-50 border-l-4 border-indigo-500 p-3 rounded-r-lg text-xs font-mono text-slate-700">
+                        <strong>Reverse Fee Formula:</strong><br>
+                        <code>Gross Invoice = (Target Net + Fixed Fee) / (1 - Percentage Rate)</code>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        <em>Example:</em> To receive exactly <strong>$100.00</strong> via Stripe (2.9% + $0.30), you must invoice <strong>$103.30</strong>.
+                    </p>
+                </section>
 
                 <!-- FAQ SEO Section -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-sm space-y-4">
+                <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 text-sm space-y-4">
                     <h2 class="font-bold text-slate-900 text-base">Frequently Asked Questions</h2>
-                    <div>
-                        <h3 class="font-semibold text-slate-800">How does reverse fee calculation work?</h3>
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="font-semibold text-slate-800">What is the standard Stripe fee in 2026?</h3>
                         <p class="text-slate-600 text-xs mt-1">
-                            When invoicing clients, payment processors take a fee percentage from the total charge, not the net amount. To receive an exact amount (e.g. $100), you must use the formula: <code>Gross = (Target Net + Fixed Fee) / (1 - Percentage Rate)</code>.
+                            Stripe's standard fee for domestic US card processing is <strong>2.9% + $0.30</strong> per successful charge. International cards incur an extra 1.5% fee.
+                        </p>
+                    </div>
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="font-semibold text-slate-800">What is the standard PayPal merchant fee in 2026?</h3>
+                        <p class="text-slate-600 text-xs mt-1">
+                            PayPal Checkout's standard domestic commercial transaction rate is <strong>3.49% + $0.49</strong> per transaction.
                         </p>
                     </div>
                     <div>
-                        <h3 class="font-semibold text-slate-800">Are Stripe and PayPal fees tax deductible?</h3>
+                        <h3 class="font-semibold text-slate-800">Are payment processing fees tax deductible?</h3>
                         <p class="text-slate-600 text-xs mt-1">
-                            Yes, in most jurisdictions, merchant processing fees are considered ordinary business expenses and can be deducted during tax filing.
+                            Yes. In most countries, payment processing fees charged by merchant services are considered legitimate business expenses and can be deducted during tax filing.
                         </p>
                     </div>
-                </div>
+                </section>
             </div>
 
-            <!-- Right Col: Sticky Sidebar Ad -->
+            <!-- Right Col: Sticky Sidebar Ad Slot -->
             <div class="space-y-6">
                 <div class="ad-placeholder h-96 rounded-2xl sticky top-4">
-                    [ Google AdSense Sidebar Rectangle Ad ]
+                    [ Sticky Sidebar AdSense Slot ]
                 </div>
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400">
-        <p>© 2026 PayFeeCalc. Free utility tool for freelancers & merchants.</p>
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <p>© 2026 PayFeeCalc. Free utility tool for freelancers, merchants, and remote teams.</p>
+        <div class="mt-2 space-x-4">
+            <button onclick="openModal('privacyModal')" class="hover:underline text-slate-600">Privacy Policy</button>
+            <span>•</span>
+            <button onclick="openModal('termsModal')" class="hover:underline text-slate-600">Terms of Service</button>
+        </div>
     </footer>
 
-    <!-- Logic Script -->
+    <!-- Compliance Modals -->
+    <div id="privacyModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 max-h-[80vh] overflow-y-auto">
+            <h2 class="text-lg font-bold text-slate-900 mb-2">Privacy Policy</h2>
+            <div class="text-xs text-slate-600 space-y-2">
+                <p>PayFeeCalc respects your privacy. We do not collect, store, or transmit any financial data entered into this tool. All calculations run strictly inside your browser (100% Client-Side).</p>
+                <p>We use third-party vendors, including Google AdSense, which use cookies to serve ads based on user visits.</p>
+            </div>
+            <button onclick="closeModal('privacyModal')" class="mt-4 bg-slate-800 text-white text-xs px-4 py-2 rounded-lg float-right">Close</button>
+        </div>
+    </div>
+
+    <div id="termsModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 max-h-[80vh] overflow-y-auto">
+            <h2 class="text-lg font-bold text-slate-900 mb-2">Terms of Service</h2>
+            <div class="text-xs text-slate-600 space-y-2">
+                <p>This tool is provided "as-is" for estimation purposes only. Actual merchant processing rates may vary depending on card brand, country, or custom enterprise agreements.</p>
+            </div>
+            <button onclick="closeModal('termsModal')" class="mt-4 bg-slate-800 text-white text-xs px-4 py-2 rounded-lg float-right">Close</button>
+        </div>
+    </div>
+
+    <!-- Core Logic JavaScript -->
     <script>
         let currentMode = 'standard';
         let customRate = 0.029;
@@ -195,7 +359,6 @@
             const region = document.getElementById('regionSelect').value;
             const extraRate = (region === 'intl') ? 0.015 : 0;
 
-            // Current Primary Processor Calc
             const rate = customRate + extraRate;
             let gross = 0, fee = 0, net = 0;
 
@@ -240,7 +403,6 @@
                 }
 
                 const tr = document.createElement('tr');
-                tr.className = "py-2";
                 tr.innerHTML = `
                     <td class="py-2.5 font-medium text-slate-800">${p.name}</td>
                     <td class="py-2.5 text-xs text-slate-500">${(p.rate * 100).toFixed(2)}% + $${p.fixed.toFixed(2)}</td>
@@ -251,7 +413,28 @@
             });
         }
 
-        // Init
+        function copyResult() {
+            const gross = document.getElementById('resGross').innerText;
+            const fee = document.getElementById('resFee').innerText;
+            const net = document.getElementById('resNet').innerText;
+            const text = `PayFeeCalc Summary: Gross Charge: ${gross} | Fee: ${fee} | Payout Net: ${net}`;
+            navigator.clipboard.writeText(text);
+            
+            const btn = document.getElementById('copyBtn');
+            btn.innerText = "✅ Copied Breakdown!";
+            setTimeout(() => { btn.innerText = "📋 Copy Calculation Breakdown"; }, 2000);
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById(id).classList.add('flex');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('flex');
+        }
+
         calculate();
     </script>
 </body>
